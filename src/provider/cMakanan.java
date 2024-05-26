@@ -36,6 +36,21 @@ public class cMakanan {
         }
     }
 
+    public void tambahDataMakanan(String mkn, int hrg, int stk) {
+        try {
+            Connection con = koneksi.getCon();
+            PreparedStatement stmt = con.prepareStatement("INSERT INTO makanan VALUES(?,?,?,?)");
+            stmt.setInt(1, 0);
+            stmt.setString(2, mkn);
+            stmt.setInt(3, hrg);
+            stmt.setInt(4, stk);
+            stmt.executeUpdate();
+            System.out.println("Berhasil Menambahkan data!");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void ubahDataMakanan(int idm, String mkn, int hrg, int stk) {
         try {
             Connection con = koneksi.getCon();
@@ -56,17 +71,18 @@ public class cMakanan {
         }
     }
 
-    public void tambahDataMakanan(String mkn, int hrg, int stk) {
+    public void hapusDataMakanan(int idm) {
         try {
             Connection con = koneksi.getCon();
-            PreparedStatement stmt = con.prepareStatement("INSERT INTO makanan VALUES(?,?,?,?)");
-            stmt.setInt(1, 0);
-            stmt.setString(2, mkn);
-            stmt.setInt(3, hrg);
-            stmt.setInt(4, stk);
-            stmt.executeUpdate();
-            System.out.println("Berhasil Menambahkan data!");
-        } catch (SQLException e) {
+            PreparedStatement stmt = con.prepareStatement("DELETE FROM makanan WHERE id_makanan = ?");
+            stmt.setInt(1, idm);
+            int rowsUpdated = stmt.executeUpdate();
+            if (rowsUpdated > 0) {
+                System.out.println("Data makanan dengan ID " + idm + " berhasil dihapus.");
+            } else {
+                System.out.println("Data makanan dengan ID " + idm + " tidak ditemukan.");
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

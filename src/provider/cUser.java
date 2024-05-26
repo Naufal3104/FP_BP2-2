@@ -105,7 +105,9 @@ public class cUser {
                                     }
 
                                 } else if (pilih1 == 3) {
-
+                                    System.out.print("Pilh Id Makanan yang akan dihapus : ");
+                                    int idm = input.nextInt();
+                                    makanan.hapusDataMakanan(idm);
                                 } else if (pilih1 > 4 && pilih1 < 1) {
                                     System.out.println("Input tidak valid!");
                                 }
