@@ -6,9 +6,13 @@ package provider;
 
 import java.sql.*;
 
-public class cMakanan {
+/**
+ *
+ * @author LENOVO
+ */
+public class cTransaksi {
 
-    public cMakanan() {
-        
+    cTransaksi() {
     }
+
 }
