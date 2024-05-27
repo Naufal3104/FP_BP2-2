@@ -13,6 +13,11 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        cUser user1 = new cUser(1, "Admin", "admin", "admin123", 1);
+        cUser user2 = new cUser(2, "Manager", "manager", "manager123", 2);
+        cDoubleLinkedList<cUser> userList = new cDoubleLinkedList<>();
+        userList.addToEnd(user1);
+        userList.addToEnd(user2);
         Scanner input = new Scanner(System.in);
         int pilih0 = 0;
         while (pilih0 != 3) {
@@ -24,8 +29,15 @@ public class Main {
             System.out.print("Pilih : ");
             pilih0 = input.nextInt();
             if (pilih0 == 1) {
+                System.out.println("==== Login Form ====");
+                System.out.print("Masukkan username: ");
+                String inputUsername = input.next();
+                System.out.print("Masukkan password: ");
+                String inputPassword = input.next();
                 cUser user = new cUser();
-                user.Login();
+                user.setUsername(inputUsername);
+                user.setPassword(inputPassword);
+                user.Login(userList);
             } else if (pilih0 == 2) {
                 // handle member login
             }
