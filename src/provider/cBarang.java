@@ -1,4 +1,5 @@
 package provider;
+
 public class cBarang {
 
     String nama;
@@ -15,5 +16,13 @@ public class cBarang {
 
     public int getHarga() {
         return harga;
+    }
+
+    public void setNama(String n) {
+        nama = n;
+    }
+
+    public void setHarga(int h) {
+        harga = h;
     }
 }

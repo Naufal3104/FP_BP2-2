@@ -1,5 +1,6 @@
 package provider;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class cAplikasi {
@@ -188,16 +189,36 @@ public class cAplikasi {
                     } while (t != null);
                     break;
                 case 4:
-                    System.out.println("Akun Owner");
-                    System.out.println("Jumlah Transaksi Diproses : " + jual.lihatDiproses());
-                    System.out.println("Pemasukan : " + jual.lihatPemasukan());
+                    int pilih4;
+                    do {
+                        System.out.println("Akun Owner");
+                        System.out.println("Jumlah Transaksi Diproses : " + jual.lihatDiproses());
+                        System.out.println("Pemasukan : " + jual.lihatPemasukan());
+                        System.out.println("1. Ubah Barang");
+                        System.out.println("2. Lihat Barang");
+                        System.out.println("3. Kembali");
+                        pilih4 = sc.nextInt();
+                        if (pilih4 == 1) {
+                            System.out.print("Masukkan nama barang yang akan diubah: ");
+                            sc.nextLine(); // Mengonsumsi karakter newline setelah membaca angka
+                            String namaBarang = sc.nextLine(); // Menggunakan sc.nextLine() untuk membaca seluruh baris
+                            System.out.print("Masukkan harga baru: ");
+                            int hargaBaru = 0;
+                            try {
+                                hargaBaru = sc.nextInt();
+                            } catch (InputMismatchException e) {
+                                System.out.println("Input harga tidak valid. Harap masukkan angka.");
+                                return; // Keluar dari fungsi jika input tidak valid
+                            }
+                            jual.ubahNamaDanHarga(namaBarang, hargaBaru, brg1, brg2, brg3, brg4, brg5);
+                        } else if (pilih4 == 2) {
+                            jual.lihatSemuaBarang(brg1, brg2, brg3, brg4, brg5);
+                        }
+                    } while (pilih4 != 3);
                     break;
                 case 5:
                     System.out.println("Terimakasih");
-
             }
-
-        } while (pilih
-                != 5);
+        } while (pilih != 5);
     }
 }

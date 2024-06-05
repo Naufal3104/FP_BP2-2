@@ -33,7 +33,7 @@ public class cTransaksi {
         return barang;
     }
 
-    public int getJumlah() {          //penghitungan biaya
+    public int getJumlah() { 
         return jumlahBrg;
     }
 
