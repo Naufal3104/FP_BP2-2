@@ -1,13 +1,5 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package provider;
 
-/**
- *
- * @author ahnaf
- */
 public class cDaftarTransaksi {
 
     cTransaksi front, rear;
@@ -49,6 +41,25 @@ public class cDaftarTransaksi {
             i++;
         }
         System.out.println("");
+    }
+
+    public void lihatTransaksiMember() {
+        int i = 1;
+        double total = 0, diskon;
+        System.out.println("DAFTAR TRANSAKSI MEMBER");
+        for (cTransaksi t = front; t != null; t = t.next) {
+            System.out.print(i + ". ");
+            System.out.print(t.getKode() + " | ");
+            System.out.print(t.getPembeli() + " | ");
+            System.out.print(t.getBarang().getNama() + " | ");
+            System.out.println(t.getJumlah() + " | ");
+            System.out.println(t.getStatus() + " | ");
+            i++;
+            total = total + (t.getBarang().getHarga() * t.getJumlah());
+        }
+        System.out.println("Total Belanja  : " + total);
+        System.out.println("Diskon         : " + (0.1 * total));
+        System.out.println("Jumlah Dibayar : " + (total - (0.1 * total)));
     }
 
     public void hapusTransaksi(int nomor) {
@@ -109,13 +120,16 @@ public class cDaftarTransaksi {
         return proses;
     }
 
-    public int lihatPemasukan() {
+    public double lihatPemasukan() {
         cTransaksi t = front;
-        int nominal = 0;
+        double nominal = 0;
         for (; t != null; t = t.next) {
-            if (t.getStatus()
-                    == 1) {
+            if (t.getStatus() == 1) {
                 nominal = nominal + t.getBarang().getHarga() * t.getJumlah();
+                System.out.print("Kode : " + t.getKode());
+                if (t.getPembeli().compareToIgnoreCase("10") == 0 || t.getPembeli().compareToIgnoreCase("11") == 0 || t.getPembeli().compareToIgnoreCase("12") == 0) {
+                    nominal = nominal - (0.1 * nominal);
+                }
             }
         }
         return nominal;
