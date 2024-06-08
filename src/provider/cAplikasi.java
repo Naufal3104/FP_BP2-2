@@ -15,6 +15,9 @@ public class cAplikasi {
         int id1 = 10, pwd1 = 100;
         int id2 = 11, pwd2 = 110;
         int id3 = 12, pwd3 = 120;
+        String nm1 = "Andi";
+        String nm2 = "Dono";
+        String nm3 = "Renita";
         int id, pin;
         cDaftarTransaksi jual = new cDaftarTransaksi();
         int pilih = 0, pilih3 = 0;
@@ -96,10 +99,13 @@ public class cAplikasi {
                         pin = sc.nextInt();
                         if (id == id1 && pin == pwd1) {
                             valid = true;
+                            System.out.println("Selamat datang, " + nm1);
                         } else if (id == id2 && pin == pwd2) {
                             valid = true;
+                            System.out.println("Selamat datang, " + nm2);
                         } else if (id == id3 && pin == pwd3) {
                             valid = true;
+                            System.out.println("Selamat datang, " + nm3);
                         }
                         if (valid == false) {
                             System.out.println("ID/PIN Salah!");
@@ -193,10 +199,14 @@ public class cAplikasi {
                     do {
                         System.out.println("Akun Owner");
                         System.out.println("Jumlah Transaksi Diproses : " + jual.lihatDiproses());
-                        System.out.println("Pemasukan : " + jual.lihatPemasukan());
-                        System.out.println("1. Ubah Barang");
+                        System.out.println("Total Pendapatan : " + jual.lihatPemasukan());
+                        jual.tampilkanTotalPenjualan();
+                        System.out.println("\n1. Ubah Barang");
                         System.out.println("2. Lihat Barang");
-                        System.out.println("3. Kembali");
+                        System.out.println("3. Lihat Pengeluaran Member");
+                        System.out.println("4. Grafik Penjualan");
+                        System.out.println("5. Kembali");
+                        System.out.print("Pilih : ");
                         pilih4 = sc.nextInt();
                         if (pilih4 == 1) {
                             System.out.print("Masukkan nama barang yang akan diubah: ");
@@ -213,8 +223,12 @@ public class cAplikasi {
                             jual.ubahNamaDanHarga(namaBarang, hargaBaru, brg1, brg2, brg3, brg4, brg5);
                         } else if (pilih4 == 2) {
                             jual.lihatSemuaBarang(brg1, brg2, brg3, brg4, brg5);
+                        } else if (pilih4 == 3) {
+                            jual.tampilkanPengeluaranMember();
+                        } else if (pilih4 == 4) {
+                            jual.tampilkanGrafikPenjualan();
                         }
-                    } while (pilih4 != 3);
+                    } while (pilih4 != 5);
                     break;
                 case 5:
                     System.out.println("Terimakasih");

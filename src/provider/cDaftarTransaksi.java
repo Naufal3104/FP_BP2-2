@@ -4,6 +4,8 @@ public class cDaftarTransaksi {
 
     cTransaksi front, rear;
     int jumlah;
+    double totalPendapatan = 0, totalNasgor = 0, totalNasgorJawa = 0, totalNasgorKecombrang = 0, totalEsTeh = 0, totalEsJeruk = 0;
+    double totalBelanjaAndi = 0, totalBelanjaDono = 0, totalBelanjaRenita = 0;
 
     cDaftarTransaksi() {
         front = rear = null;
@@ -120,6 +122,26 @@ public class cDaftarTransaksi {
 
     public void prosesTransaksi(cTransaksi t) {
         t.setStatus(1);
+        double penjualan = t.getBarang().getHarga() * t.getJumlah();
+        if (t.getBarang().getNama().equals("Nasi Goreng")) {
+            totalNasgor += penjualan;
+        } else if (t.getBarang().getNama().equals("Nasi Goreng Jawa")) {
+            totalNasgorJawa += penjualan;
+        } else if (t.getBarang().getNama().equals("Nasi Goreng Sei Kecombrang")) {
+            totalNasgorKecombrang += penjualan;
+        } else if (t.getBarang().getNama().equals("Es Teh")) {
+            totalEsTeh += penjualan;
+        } else if (t.getBarang().getNama().equals("Es Jeruk")) {
+            totalEsJeruk += penjualan;
+        }
+
+        if (t.getPembeli().equals("10")) { // asumsikan id "10" adalah Andi
+            totalBelanjaAndi += penjualan;
+        } else if (t.getPembeli().equals("11")) { // asumsikan id "11" adalah Dono
+            totalBelanjaDono += penjualan;
+        } else if (t.getPembeli().equals("12")) { // asumsikan id "12" adalah Renita
+            totalBelanjaRenita += penjualan;
+        }
     }
 
     public int lihatDiproses() {
@@ -135,20 +157,19 @@ public class cDaftarTransaksi {
 
     public double lihatPemasukan() {
         cTransaksi t = front;
-        double nominal = 0;
         for (; t != null; t = t.next) {
             if (t.getStatus() == 1) {
-                nominal = nominal + t.getBarang().getHarga() * t.getJumlah();
-                System.out.print("Kode : " + t.getKode());
+                totalPendapatan = totalPendapatan + t.getBarang().getHarga() * t.getJumlah();
+                System.out.println("Kode : " + t.getKode());
                 if (t.getPembeli().compareToIgnoreCase("10") == 0 || t.getPembeli().compareToIgnoreCase("11") == 0 || t.getPembeli().compareToIgnoreCase("12") == 0) {
-                    nominal = nominal - (0.1 * nominal);
+                    totalPendapatan = totalPendapatan - (0.1 * totalPendapatan);
                 }
             }
         }
-        return nominal;
+        return totalPendapatan;
     }
 
-    public void ubahNamaDanHarga(String n, int h, cBarang brg1, cBarang brg2, cBarang brg3, cBarang brg4, cBarang brg5) {        
+    public void ubahNamaDanHarga(String n, int h, cBarang brg1, cBarang brg2, cBarang brg3, cBarang brg4, cBarang brg5) {
         // Periksa nama barang satu per satu dan ubah harganya jika ditemukan
         if (brg1.getNama().equalsIgnoreCase(n)) {
             brg1.setHarga(h);
@@ -184,5 +205,37 @@ public class cDaftarTransaksi {
         if (barang5 != null) {
             System.out.println("5. " + barang5.getNama() + " | Harga: " + barang5.getHarga());
         }
+    }
+
+    public void tampilkanTotalPenjualan() {
+        System.out.println("1. Nasi Goreng : " + totalNasgor);
+        System.out.println("2. Nasi Goreng Jawa : " + totalNasgorJawa);
+        System.out.println("3. Nasi Goreng Sei Kecombrang : " + totalNasgorKecombrang);
+        System.out.println("4. Es Teh : " + totalEsTeh);
+        System.out.println("5. Es Jeruk : " + totalEsJeruk);
+    }
+
+    public void tampilkanPengeluaranMember() {
+        System.out.println("1. Andi   : " + totalBelanjaAndi);
+        System.out.println("2. Dono   : " + totalBelanjaDono);
+        System.out.println("3. Renita : " + totalBelanjaRenita);
+    }
+
+    private void tampilkanGrafikBarang(String namaBarang, double totalPenjualan) {
+        int jumlahStrip = (int) (totalPenjualan / 10000); // Pembulatan ke bawah ke puluhan ribu
+        StringBuilder grafik = new StringBuilder();
+        for (int i = 0; i < jumlahStrip; i++) {
+            grafik.append("-");
+        }
+        System.out.println(namaBarang + " : " + grafik.toString() + " " + totalPenjualan);
+    }
+
+    public void tampilkanGrafikPenjualan() {
+        System.out.println("Grafik Penjualan:");
+        tampilkanGrafikBarang("Nasi Goreng", totalNasgor);
+        tampilkanGrafikBarang("Nasi Goreng Jawa", totalNasgorJawa);
+        tampilkanGrafikBarang("Nasi Goreng Sei Kecombrang", totalNasgorKecombrang);
+        tampilkanGrafikBarang("Es Teh", totalEsTeh);
+        tampilkanGrafikBarang("Es Jeruk", totalEsJeruk);
     }
 }
