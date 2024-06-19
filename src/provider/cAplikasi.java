@@ -10,8 +10,8 @@ public class cAplikasi {
         cBarang brg1 = new cBarang("Nasi Goreng", 11000);
         cBarang brg2 = new cBarang("Nasi Goreng Jawa", 13000);
         cBarang brg3 = new cBarang("Nasi Goreng Sei Kecombrang", 19000);
-        cBarang brg4 = new cBarang("Es Teh", 3000);
-        cBarang brg5 = new cBarang("Es Jeruk", 4000);
+        cBarang brg4 = new cBarang("Es Teh", 5000);
+        cBarang brg5 = new cBarang("Es Jeruk", 5000);
         int id1 = 10, pwd1 = 100;
         int id2 = 11, pwd2 = 110;
         int id3 = 12, pwd3 = 120;

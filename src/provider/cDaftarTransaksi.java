@@ -124,23 +124,48 @@ public class cDaftarTransaksi {
         t.setStatus(1);
         double penjualan = t.getBarang().getHarga() * t.getJumlah();
         if (t.getBarang().getNama().equals("Nasi Goreng")) {
-            totalNasgor += penjualan;
+            if (t.getPembeli().equals("10") || t.getPembeli().equals("11") || t.getPembeli().equals("12")) {
+                totalNasgor += penjualan - (penjualan * 0.1);
+            } else {
+                totalNasgor += penjualan;
+            }
+            totalPendapatan += totalNasgor;
         } else if (t.getBarang().getNama().equals("Nasi Goreng Jawa")) {
-            totalNasgorJawa += penjualan;
+            if (t.getPembeli().equals("10") || t.getPembeli().equals("11") || t.getPembeli().equals("12")) {
+                totalNasgorJawa += penjualan - (penjualan * 0.1);
+            } else {
+                totalNasgorJawa += penjualan;
+            }
+            totalPendapatan += totalNasgorJawa;
         } else if (t.getBarang().getNama().equals("Nasi Goreng Sei Kecombrang")) {
-            totalNasgorKecombrang += penjualan;
+            if (t.getPembeli().equals("10") || t.getPembeli().equals("11") || t.getPembeli().equals("12")) {
+                totalNasgorKecombrang += penjualan - (penjualan * 0.1);
+            } else {
+                totalNasgorKecombrang += penjualan;
+            }
+            totalPendapatan += totalNasgorKecombrang;
         } else if (t.getBarang().getNama().equals("Es Teh")) {
-            totalEsTeh += penjualan;
+            if (t.getPembeli().equals("10") || t.getPembeli().equals("11") || t.getPembeli().equals("12")) {
+                totalEsTeh += penjualan - (penjualan * 0.1);
+            } else {
+                totalEsTeh += penjualan;
+            }
+            totalPendapatan += totalEsTeh;
         } else if (t.getBarang().getNama().equals("Es Jeruk")) {
-            totalEsJeruk += penjualan;
+            if (t.getPembeli().equals("10") || t.getPembeli().equals("11") || t.getPembeli().equals("12")) {
+                totalEsJeruk += penjualan - (penjualan * 0.1);
+            } else {
+                totalEsJeruk += penjualan;
+            }
+            totalPendapatan += totalEsJeruk;
         }
 
         if (t.getPembeli().equals("10")) { // asumsikan id "10" adalah Andi
-            totalBelanjaAndi += penjualan;
+            totalBelanjaAndi += penjualan - (penjualan * 0.1);
         } else if (t.getPembeli().equals("11")) { // asumsikan id "11" adalah Dono
-            totalBelanjaDono += penjualan;
+            totalBelanjaDono += penjualan - (penjualan * 0.1);
         } else if (t.getPembeli().equals("12")) { // asumsikan id "12" adalah Renita
-            totalBelanjaRenita += penjualan;
+            totalBelanjaRenita += penjualan - (penjualan * 0.1);
         }
     }
 
@@ -156,16 +181,6 @@ public class cDaftarTransaksi {
     }
 
     public double lihatPemasukan() {
-        cTransaksi t = front;
-        for (; t != null; t = t.next) {
-            if (t.getStatus() == 1) {
-                totalPendapatan = totalPendapatan + t.getBarang().getHarga() * t.getJumlah();
-                System.out.println("Kode : " + t.getKode());
-                if (t.getPembeli().compareToIgnoreCase("10") == 0 || t.getPembeli().compareToIgnoreCase("11") == 0 || t.getPembeli().compareToIgnoreCase("12") == 0) {
-                    totalPendapatan = totalPendapatan - (0.1 * totalPendapatan);
-                }
-            }
-        }
         return totalPendapatan;
     }
 
@@ -222,10 +237,10 @@ public class cDaftarTransaksi {
     }
 
     private void tampilkanGrafikBarang(String namaBarang, double totalPenjualan) {
-        int jumlahStrip = (int) (totalPenjualan / 10000); // Pembulatan ke bawah ke puluhan ribu
+        int jumlahStrip = (int) (totalPenjualan / 5000); // Pembulatan ke bawah ke puluhan ribu
         StringBuilder grafik = new StringBuilder();
         for (int i = 0; i < jumlahStrip; i++) {
-            grafik.append("-");
+            grafik.append("X");
         }
         System.out.println(namaBarang + " : " + grafik.toString() + " " + totalPenjualan);
     }
